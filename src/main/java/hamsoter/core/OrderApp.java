@@ -3,15 +3,17 @@ package hamsoter.core;
 import hamsoter.core.member.Grade;
 import hamsoter.core.member.Member;
 import hamsoter.core.member.MemberService;
-import hamsoter.core.member.MemberServiceImpl;
 import hamsoter.core.order.Order;
 import hamsoter.core.order.OrderService;
 import hamsoter.core.order.OrderServiceImpl;
 
 public class OrderApp {
     public static void main(String[] args) {
-        MemberService memberService = new MemberServiceImpl();
-        OrderService orderService = new OrderServiceImpl();
+
+        AppConfig appConfig = new AppConfig();
+        MemberService memberService = appConfig.memberService();
+
+        OrderService orderService = appConfig.orderService();
 
         Long memberId = 1L;
         Member member1 = new Member(memberId, "소이", Grade.BASIC);

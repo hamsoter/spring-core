@@ -1,16 +1,19 @@
 package hamsoter.core.order;
 
 import hamsoter.core.discount.DiscountPolicy;
-import hamsoter.core.discount.FixDiscountPolicy;
 import hamsoter.core.member.Member;
 import hamsoter.core.member.MemberRepository;
-import hamsoter.core.member.MemoryMemberRepository;
 
 public class OrderServiceImpl implements OrderService{
 
 
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
+    private final MemberRepository memberRepository;
+    private final DiscountPolicy discountPolicy;
+
+    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+        this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
 
 
     @Override
