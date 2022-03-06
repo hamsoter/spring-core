@@ -1,10 +1,13 @@
 package hamsoter.core.singleton;
 
 import hamsoter.core.AppConfig;
+import hamsoter.core.beanfind.ApplicationContextExtendsFindTest;
 import hamsoter.core.member.MemberService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -42,6 +45,23 @@ public class SingletonTest {
 
         // same == 인스턴스 참조까지 비교
         assertThat(singletonService1).isSameAs(singletonService2);
+
+    }
+
+    @Test
+    @DisplayName("스프링 컨테이너와 싱글톤")
+    void springContainer() {
+        ApplicationContext ac = new AnnotationConfigApplicationContext(AppConfig.class);
+
+
+        MemberService memberService1 = ac.getBean("memberService", MemberService.class);
+        MemberService memberService2 = ac.getBean("memberService", MemberService.class);
+
+        // memberService 1과 2가 같은 객체를 반환하는지 테스트
+        System.out.println("memberService1 = " + memberService1);
+        System.out.println("memberService2 = " + memberService2);
+
+        assertThat(memberService1).isSameAs(memberService2);
 
     }
 }
