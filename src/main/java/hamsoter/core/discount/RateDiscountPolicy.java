@@ -2,7 +2,9 @@ package hamsoter.core.discount;
 
 import hamsoter.core.member.Grade;
 import hamsoter.core.member.Member;
+import org.springframework.stereotype.Component;
 
+@Component
 public class RateDiscountPolicy implements DiscountPolicy {
     private int doscountPercent = 10;
 
