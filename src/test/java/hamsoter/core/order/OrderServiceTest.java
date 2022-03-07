@@ -24,7 +24,7 @@ public class OrderServiceTest {
 
     @Test
     void 주문생성() {
-        Member member1 = new Member(1L,"후타바 안즈", Grade.VIP);
+        Member member1 = new Member(1L, "후타바 안즈", Grade.VIP);
 
         memberService.join(member1);
 
