@@ -16,7 +16,7 @@ public class AutowiredTest {
         ApplicationContext ac = new AnnotationConfigApplicationContext(TestBean.class);
     }
 
-    // 스프링 빈이 아닌 
+    // 스프링 빈이 아닌
     static class TestBean {
 
         // 메서드 호출 자체가 씹힘
