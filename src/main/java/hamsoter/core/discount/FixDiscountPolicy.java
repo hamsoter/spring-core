@@ -2,7 +2,9 @@ package hamsoter.core.discount;
 
 import hamsoter.core.member.Grade;
 import hamsoter.core.member.Member;
+import org.springframework.stereotype.Component;
 
+@Component
 public class FixDiscountPolicy implements DiscountPolicy{
 
     private int discountFixAmount = 1000; // 할인액
