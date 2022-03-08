@@ -1,5 +1,6 @@
 package hamsoter.core.order;
 
+import hamsoter.core.annotation.MainDiscountPolicy;
 import hamsoter.core.discount.DiscountPolicy;
 import hamsoter.core.member.Member;
 import hamsoter.core.member.MemberRepository;
@@ -17,7 +18,7 @@ public class OrderServiceImpl implements OrderService{
     @Autowired private  DiscountPolicy rateDiscountPolicy;
 
 
-    public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+    public OrderServiceImpl(MemberRepository memberRepository, @MainDiscountPolicy DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
     }

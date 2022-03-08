@@ -1,13 +1,12 @@
 package hamsoter.core.discount;
 
+import hamsoter.core.annotation.MainDiscountPolicy;
 import hamsoter.core.member.Grade;
 import hamsoter.core.member.Member;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
 
 @Component
-@Primary
+@MainDiscountPolicy
 public class RateDiscountPolicy implements DiscountPolicy {
     private int doscountPercent = 10;
 
