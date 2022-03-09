@@ -1,6 +1,9 @@
 package hamsoter.core.lifecycle;
 
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 public class NetworkClient {
     private String url;
 
@@ -28,7 +31,8 @@ public class NetworkClient {
     }
 
     // 프로퍼티 세팅(의존관계 주입)이 끝나면 호출되는 메서드
-    public void init() throws Exception {
+    @PostConstruct
+    public void init() {
         System.out.println("NetworkClient.afterPropertiesSet");
         connect();
         call("초기화 연결 메세지");
@@ -36,7 +40,8 @@ public class NetworkClient {
 
 
     // 빈 종료시
-    public void close() throws Exception {
+    @PreDestroy
+    public void close() {
         System.out.println("NetworkClient.destroy");
         disconnect();
     }
