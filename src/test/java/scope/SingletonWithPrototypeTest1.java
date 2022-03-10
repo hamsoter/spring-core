@@ -3,6 +3,7 @@ package scope;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
 
@@ -48,8 +49,8 @@ public class SingletonWithPrototypeTest1 {
 
         // 프로토타입 빈도 최초 1회 생성되기 때문에,
         // 둘은 같은 인스턴스를 공유하고 있다.
-        System.out.println("clientBean1.prototypebean = " + clientBean1.getPrototypeBean());
-        System.out.println("clientBean2.prototypebean = " + clientBean2.getPrototypeBean());
+//        System.out.println("clientBean1.prototypebean = " + clientBean1.getPrototypeBean());
+//        System.out.println("clientBean2.prototypebean = " + clientBean2.getPrototypeBean());
 
 
 
@@ -58,19 +59,23 @@ public class SingletonWithPrototypeTest1 {
     @Scope("singleton")
     static class ClientBean {
         // 자동 의존관계 주입으로 생성
-        private final PrototypeBean prototypeBean;
+//        private final PrototypeBean prototypeBean;
 
         @Autowired
-        public ClientBean(PrototypeBean prototypeBean) {
-            this.prototypeBean = prototypeBean;
-        }
+        ApplicationContext ac;
 
-        public PrototypeBean getPrototypeBean() {
-            return prototypeBean;
-        }
+//        @Autowired
+//        public ClientBean(PrototypeBean prototypeBean) {
+//            this.prototypeBean = prototypeBean;
+//        }
+//
+//        public PrototypeBean getPrototypeBean() {
+//            return prototypeBean;
+//        }
 
 
         public int logic() {
+            PrototypeBean prototypeBean = ac.getBean(PrototypeBean.class);
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
