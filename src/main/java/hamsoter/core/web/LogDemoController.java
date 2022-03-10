@@ -2,6 +2,7 @@ package hamsoter.core.web;
 
 import hamsoter.core.common.MyLogger;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -13,13 +14,13 @@ import javax.servlet.http.HttpServletRequest;
 public class LogDemoController {
 
     private final LogDemoService logDemoService;
-    private final MyLogger myLogger;
+    private final ObjectProvider<MyLogger> myLoggerProvider;
 
     @RequestMapping("log-demo")
     @ResponseBody   // 따로 뷰가 아닌 body로 값을 반환해버림
     // HTTP 요청정보를 파라미터로 받음
-    public String logDemo(HttpServletRequest request) {
-
+    public String logDemo(HttpServletRequest request) throws InterruptedException {
+        MyLogger myLogger = myLoggerProvider.getObject();   // 빈이 만들어지는 시점
         String requestURL = request.getRequestURL().toString();
         myLogger.setRequestURL(requestURL);
 
