@@ -2,6 +2,7 @@ package scope;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -45,7 +46,7 @@ public class SingletonWithPrototypeTest1 {
         assertThat(count1).isEqualTo(1);
 
         int count2 = clientBean2.logic();
-        assertThat(count2).isEqualTo(2);
+        assertThat(count2).isEqualTo(1);
 
         // 프로토타입 빈도 최초 1회 생성되기 때문에,
         // 둘은 같은 인스턴스를 공유하고 있다.
@@ -58,24 +59,13 @@ public class SingletonWithPrototypeTest1 {
 
     @Scope("singleton")
     static class ClientBean {
-        // 자동 의존관계 주입으로 생성
-//        private final PrototypeBean prototypeBean;
-
         @Autowired
-        ApplicationContext ac;
+        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
 
-//        @Autowired
-//        public ClientBean(PrototypeBean prototypeBean) {
-//            this.prototypeBean = prototypeBean;
-//        }
-//
-//        public PrototypeBean getPrototypeBean() {
-//            return prototypeBean;
-//        }
 
 
         public int logic() {
-            PrototypeBean prototypeBean = ac.getBean(PrototypeBean.class);
+            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
